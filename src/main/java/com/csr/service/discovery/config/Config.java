@@ -28,7 +28,7 @@ public class Config {
 	
 	public static CSRDataProtocol getConnection() {
 		if (protocol == null)
-			protocol = mode.initializeProtocol();
+			protocol = mode.getProtocol();
 		return protocol;
 	}
 	

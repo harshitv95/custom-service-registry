@@ -34,8 +34,6 @@ public class Discover {
 			} else {
 				System.out.println("REGISTERED SUCCESSFULLY!");
 			}
-		
-			
 		}
 		
 	}

@@ -30,7 +30,7 @@ public class TcpClient implements Closeable {
 	
 	protected void initialize() throws UnknownHostException, IOException {
 		client = new Socket(host, port);
-		out = new PrintWriter(client.getOutputStream());
+		out = new PrintWriter(client.getOutputStream(), true);
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		additionalInitialize();
 		closed = false;
