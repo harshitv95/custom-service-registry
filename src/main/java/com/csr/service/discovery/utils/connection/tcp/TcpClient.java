@@ -69,4 +69,12 @@ public class TcpClient implements Closeable {
 	}
 	
 	protected void additionalClose() throws IOException { }
+
+	@Override
+	protected void finalize() throws Throwable {
+		close();
+		super.finalize();
+	}
+	
+	
 }

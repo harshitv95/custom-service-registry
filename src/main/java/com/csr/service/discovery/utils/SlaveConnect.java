@@ -14,7 +14,7 @@ public class SlaveConnect {
 		try{
 //			return getResponse((Config.getHttpUrl(hostName)));
 			return getResponse(hostName);
-		}catch(IOException e){
+		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}

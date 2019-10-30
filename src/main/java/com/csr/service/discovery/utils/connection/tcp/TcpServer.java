@@ -31,14 +31,23 @@ public class TcpServer extends TcpClient implements Closeable {
 			while (true) {
 				try {
 					client = server.accept();
-					out = new PrintWriter(client.getOutputStream(), true);
-					in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-					additionalInitialize();
-//					String message = in.lines().collect(Collectors.joining("\n"));
-					String message = in.readLine();
-					if (this.onAccept != null) {
-						this.onAccept.accept(new RequestMeta(client, message, in, out));
-					}
+					new Thread(() -> {
+						try (
+								BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+								PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+							) {
+							additionalInitialize();
+//							out = new PrintWriter(client.getOutputStream(), true);
+//							in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+//							String message = in.lines().collect(Collectors.joining("\n"));
+							String message = in.readLine();
+							if (this.onAccept != null) {
+								this.onAccept.accept(new RequestMeta(client, message, in, out));
+							}
+						} catch (IOException e) {
+							
+						}
+					}).start();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
