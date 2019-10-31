@@ -65,6 +65,7 @@ public class Manager {
 				if(response==null)
 					storeHelper.unRegister(host);
 				else{
+					System.out.println(String.format("Ping to [%s] responded:\n%s", host, response));
 					storeHelper.getStore().register(host, response);
 					storeHelper.pulse(host, response);
 				}

@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.csr.service.discovery.Discover.MessageWords;
 import com.csr.service.discovery.config.Config;
 import com.csr.service.discovery.custom.RegistryListener;
 import com.csr.service.discovery.protocols.CSRDataProtocol;
@@ -24,8 +25,8 @@ public class ServiceDiscovery {
 		TCP(Tcp.class, () -> {
 			try {
 				return new TcpServer(Config.masterPortNum, (config) -> {
-					if (config.message.equals("register")) {
-						config.out.println("registered");
+					if (config.message.equals(MessageWords.Register.text)) {
+						config.out.println(MessageWords.Registered.text);
 						System.out.println("Slave " + config.client.getInetAddress().getHostAddress()
 								+ " requesting registration");
 						try {
@@ -114,7 +115,7 @@ public class ServiceDiscovery {
 	}
 
 	/**
-	 * This will add <code>hsotName</code> to the list of registered components.
+	 * This will add <code>hostName</code> to the list of registered components.
 	 * <code>hostName</code> will be mapped to <code>info</code>. Use your desired
 	 * request mapping to register, and call this method.
 	 * 
